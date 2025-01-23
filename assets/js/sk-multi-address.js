@@ -1,10 +1,20 @@
 jQuery(function($) {
+    // Initialize Select2 for country select
+    $('.sk-country-select').select2({
+        placeholder: 'Search for a country...',
+        allowClear: true,
+        width: '100%',
+        minimumResultsForSearch: 0 // Always show search box
+    });
+
     // Handle address form submission
     $('#sk-new-address-form').on('submit', function(e) {
         e.preventDefault();
         
+        const form = $(this);
         const formData = new FormData(this);
         const addressData = {};
+        const addressId = form.data('address-id');
         
         formData.forEach((value, key) => {
             addressData[key] = value;
@@ -16,11 +26,55 @@ jQuery(function($) {
             data: {
                 action: 'sk_save_address',
                 nonce: skMultiAddress.nonce,
-                address: addressData
+                address: addressData,
+                address_id: addressId // Will be undefined for new addresses
             },
             success: function(response) {
                 if (response.success) {
                     location.reload();
+                }
+            }
+        });
+    });
+    // Handle address editing
+    $('.sk-edit-address').on('click', function() {
+        const addressItem = $(this).closest('.sk-address-item');
+        const addressId = addressItem.data('address-id');
+
+        // Get address data
+        $.ajax({
+            url: skMultiAddress.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'sk_get_address',
+                nonce: skMultiAddress.nonce,
+                address_id: addressId
+            },
+            success: function(response) {
+                if (response.success) {
+                    const address = response.data;
+                    
+                    // Fill form with address data
+                    const form = $('#sk-new-address-form');
+                    form.find('[name="first_name"]').val(address.first_name);
+                    form.find('[name="last_name"]').val(address.last_name);
+                    form.find('[name="email"]').val(address.email);
+                    form.find('[name="phone"]').val(address.phone);
+                    form.find('[name="address_1"]').val(address.address_1);
+                    form.find('[name="address_2"]').val(address.address_2);
+                    form.find('[name="city"]').val(address.city);
+                    form.find('[name="state"]').val(address.state);
+                    form.find('[name="postcode"]').val(address.postcode);
+                    form.find('[name="country"]').val(address.country);
+
+                    // Add address ID to form and change submit button text
+                    form.data('address-id', addressId);
+                    form.find('button[type="submit"]').text(skMultiAddress.i18n.updateAddress);
+                    
+                    // Scroll to form
+                    $('html, body').animate({
+                        scrollTop: form.offset().top - 100
+                    }, 500);
                 }
             }
         });
@@ -84,5 +138,13 @@ jQuery(function($) {
                 }
             }
         });
+    });
+
+    $('.sk-reset-form').on('click', function() {
+        const form = $('#sk-new-address-form');
+        form[0].reset();
+        form.removeData('address-id');
+        form.find('button[type="submit"]').text(skMultiAddress.i18n.saveAddress);
+        $('#sk-form-title').text(skMultiAddress.i18n.addNewAddress);
     });
 });

@@ -83,9 +83,14 @@ class SK_Multiple_Addresses {
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('sk-multi-address'),
                 'i18n' => array(
-                    'confirmDelete' => __('Are you sure you want to delete this address?', 'sk-multi-address')
+                    'confirmDelete' => __('Are you sure you want to delete this address?', 'sk-multi-address'),
+                    'updateAddress' => __('Update Address', 'sk-multi-address')
                 )
             ));
+
+            // Enqueue Select2
+            wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
+            wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
         }
     }
 
@@ -100,13 +105,23 @@ class SK_Multiple_Addresses {
             $saved_addresses = array();
         }
         
-        $address_id = uniqid('addr_');
-        $saved_addresses[$address_id] = $address_data;
+        // Check if this is an edit or new address
+        if (isset($_POST['address_id']) && !empty($_POST['address_id'])) {
+            $address_id = sanitize_text_field($_POST['address_id']);
+            if (!isset($saved_addresses[$address_id])) {
+                wp_send_json_error(__('Address not found', 'sk-multi-address'));
+            }
+        } else {
+            $address_id = uniqid('addr_');
+        }
         
+        $saved_addresses[$address_id] = $address_data;
         update_user_meta($user_id, 'sk_saved_addresses', $saved_addresses);
         
         wp_send_json_success(array(
-            'message' => __('Address saved successfully', 'sk-multi-address'),
+            'message' => isset($_POST['address_id']) 
+                ? __('Address updated successfully', 'sk-multi-address')
+                : __('Address saved successfully', 'sk-multi-address'),
             'address_id' => $address_id
         ));
     }

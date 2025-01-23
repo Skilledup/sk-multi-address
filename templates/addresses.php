@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
                         echo wp_kses_post($address['first_name'] . ' ' . $address['last_name'] . '<br>');
                         echo wp_kses_post('<strong>' . __('Email:', 'sk-multi-address') . '</strong> ' . $address['email'] . '<br>');
                         echo wp_kses_post('<strong>' . __('Phone:', 'sk-multi-address') . '</strong> ' . $address['phone'] . '<br>');
-                        echo wp_kses_post($address['address_1'] . '<br>');
+                        echo wp_kses_post('<strong>' . __('Address:', 'sk-multi-address') . '</strong> ' . $address['address_1'] . '<br>');
                         if (!empty($address['address_2'])) {
                             echo wp_kses_post($address['address_2'] . '<br>');
                         }
@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
     </div>
 
     <div class="sk-add-address-form">
-        <h3><?php esc_html_e('Add New Address', 'sk-multi-address'); ?></h3>
+        <h3 id="sk-form-title"><?php esc_html_e('Add New Address', 'sk-multi-address'); ?></h3>
         <form id="sk-new-address-form">
             <div class="sk-form-row">
                 <div class="sk-form-field">
@@ -86,7 +86,7 @@ if (!defined('ABSPATH')) {
                 </div>
                 <div class="sk-form-field">
                     <label><?php esc_html_e('Country', 'sk-multi-address'); ?></label>
-                    <select name="country" required>
+                    <select name="country" class="sk-country-select" required>
                         <?php
                         $countries_obj = new WC_Countries();
                         $countries = $countries_obj->get_countries();
@@ -98,7 +98,10 @@ if (!defined('ABSPATH')) {
                 </div>
             </div>
 
-            <button type="submit" class="button"><?php esc_html_e('Save Address', 'sk-multi-address'); ?></button>
+            <div class="sk-form-actions">
+                <button type="submit" class="button"><?php esc_html_e('Save Address', 'sk-multi-address'); ?></button>
+                <button type="button" class="button sk-reset-form" style="margin-left: 10px;"><?php esc_html_e('Cancel', 'sk-multi-address'); ?></button>
+            </div>
         </form>
     </div>
 </div>
