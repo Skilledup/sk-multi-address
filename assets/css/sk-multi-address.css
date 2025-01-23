@@ -1,0 +1,72 @@
+.sk-addresses-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sk-addresses-list {
+    margin-bottom: 40px;
+}
+
+.sk-address-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.sk-address-content {
+    flex: 1;
+    line-height: 1.5;
+}
+
+.sk-address-actions {
+    margin-left: 20px;
+}
+
+.sk-address-actions button {
+    margin: 0 5px;
+}
+
+.sk-form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.sk-form-field {
+    flex: 1;
+}
+
+.sk-form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.sk-form-field input,
+.sk-form-field select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.sk-checkout-address-selector {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f7f7f7;
+    border-radius: 4px;
+}
+
+.sk-checkout-address-selector select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+#sk-new-address-form button[type="submit"] {
+    margin-top: 20px;
+} 
