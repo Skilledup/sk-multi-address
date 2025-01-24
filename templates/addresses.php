@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
                         if (!empty($address['address_2'])) {
                             echo wp_kses_post($address['address_2'] . '<br>');
                         }
-                        echo wp_kses_post($address['city'] . ', ' . $address['state'] . ' ' . $address['postcode'] . '<br>');
+                        echo wp_kses_post($address['city'] . (!empty($address['state']) ? ', ' . $address['state'] : '') . ' ' . $address['postcode'] . '<br>');
                         echo wp_kses_post($address['country']);
                         ?>
                     </div>
@@ -72,6 +72,7 @@ if (!defined('ABSPATH')) {
                 <div class="sk-form-field">
                     <label><?php esc_html_e('Country', 'sk-multi-address'); ?></label>
                     <select name="country" class="sk-country-select" required>
+                        <option value=""><?php esc_html_e('Select a country...', 'sk-multi-address'); ?></option>
                         <?php
                         $countries_obj = new WC_Countries();
                         $countries = $countries_obj->get_countries();
@@ -86,6 +87,7 @@ if (!defined('ABSPATH')) {
                     <select name="state" class="sk-state-select" disabled required>
                         <option value=""><?php esc_html_e('Select a country first...', 'sk-multi-address'); ?></option>
                     </select>
+                    <div class="sk-loading-spinner"></div>
                 </div>
             </div>
 

@@ -99,4 +99,44 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 6px;
+}
+
+.sk-state-field.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sk-state-field {
+    position: relative;
+}
+
+.sk-loading-spinner {
+    display: none;
+    position: absolute;
+    left: 15px;
+    top: 70%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.sk-state-field.loading .sk-loading-spinner {
+    display: block;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
 } 

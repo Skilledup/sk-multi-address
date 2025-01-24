@@ -18,6 +18,7 @@ jQuery(function($) {
     // Handle country change to update states
     $('.sk-country-select').on('change', function() {
         var countryCode = $(this).val();
+        var $stateField = $('.sk-state-field');
         var $stateSelect = $('.sk-state-select');
         
         if (!countryCode) {
@@ -29,6 +30,9 @@ jQuery(function($) {
             return;
         }
 
+        // Add loading state
+        $stateField.addClass('loading');
+        
         var data = {
             action: 'sk_get_states',
             country: countryCode,
@@ -41,13 +45,11 @@ jQuery(function($) {
                 $stateSelect.empty();
                 
                 if (Object.keys(states).length === 0) {
-                    // If country has no states, keep disabled with appropriate message
                     $stateSelect.prop('disabled', true)
                                .prop('required', false)
                                .append('<option value="">-</option>')
                                .trigger('change');
                 } else {
-                    // If country has states, enable and populate options
                     $stateSelect.append('<option value="">' + skMultiAddress.i18n.selectState + '</option>');
                     
                     $.each(states, function(code, name) {
@@ -61,6 +63,9 @@ jQuery(function($) {
                                .trigger('change');
                 }
             }
+        }).always(function() {
+            // Remove loading state
+            $stateField.removeClass('loading');
         });
     });
 
@@ -129,6 +134,10 @@ jQuery(function($) {
                     nonce: skMultiAddress.nonce
                 };
                 
+                // Add loading state
+                var $stateField = form.find('.sk-state-field');
+                $stateField.addClass('loading');
+                
                 $.post(skMultiAddress.ajax_url, stateData, function(stateResponse) {
                     if (stateResponse.success) {
                         var $stateSelect = form.find('[name="state"]');
@@ -158,6 +167,9 @@ jQuery(function($) {
                         form.find('[name="country"]').val(address.country).trigger('change.select2');
                         $stateSelect.val(address.state).trigger('change.select2');
                     }
+                }).always(function() {
+                    // Remove loading state
+                    $stateField.removeClass('loading');
                 });
                 
                 // Add address ID to form
