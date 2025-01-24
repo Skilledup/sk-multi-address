@@ -41,6 +41,10 @@ class SK_Multiple_Addresses {
         
         // Add addresses to checkout
         add_action('woocommerce_before_checkout_billing_form', array($this, 'add_address_selector_to_checkout'));
+
+        // Add this to your main plugin class
+        add_action('wp_ajax_sk_get_states', array($this, 'get_states_ajax'));
+        add_action('wp_ajax_nopriv_sk_get_states', array($this, 'get_states_ajax'));
     }
 
     public function add_addresses_endpoint() {
@@ -84,7 +88,8 @@ class SK_Multiple_Addresses {
                 'nonce' => wp_create_nonce('sk-multi-address'),
                 'i18n' => array(
                     'confirmDelete' => __('Are you sure you want to delete this address?', 'sk-multi-address'),
-                    'updateAddress' => __('Update Address', 'sk-multi-address')
+                    'updateAddress' => __('Update Address', 'sk-multi-address'),
+                    'selectState' => __('Select a state...', 'sk-multi-address')
                 )
             ));
 
@@ -160,6 +165,25 @@ class SK_Multiple_Addresses {
         $saved_addresses = get_user_meta(get_current_user_id(), 'sk_saved_addresses', true);
         if (!empty($saved_addresses)) {
             include plugin_dir_path(__FILE__) . 'templates/checkout-address-selector.php';
+        }
+    }
+
+    public function get_states_ajax() {
+        check_ajax_referer('sk-multi-address', 'nonce');
+        
+        $country_code = isset($_POST['country']) ? sanitize_text_field($_POST['country']) : '';
+        
+        if (empty($country_code)) {
+            wp_send_json_error('Country code is required');
+        }
+        
+        $countries_obj = new WC_Countries();
+        $states = $countries_obj->get_states($country_code);
+        
+        if (empty($states)) {
+            wp_send_json_success(array());
+        } else {
+            wp_send_json_success($states);
         }
     }
 }

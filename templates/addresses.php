@@ -70,21 +70,6 @@ if (!defined('ABSPATH')) {
 
             <div class="sk-form-row">
                 <div class="sk-form-field">
-                    <label><?php esc_html_e('City', 'sk-multi-address'); ?></label>
-                    <input type="text" name="city" required>
-                </div>
-                <div class="sk-form-field">
-                    <label><?php esc_html_e('State', 'sk-multi-address'); ?></label>
-                    <input type="text" name="state" required>
-                </div>
-            </div>
-
-            <div class="sk-form-row">
-                <div class="sk-form-field">
-                    <label><?php esc_html_e('Postcode', 'sk-multi-address'); ?></label>
-                    <input type="text" name="postcode" required>
-                </div>
-                <div class="sk-form-field">
                     <label><?php esc_html_e('Country', 'sk-multi-address'); ?></label>
                     <select name="country" class="sk-country-select" required>
                         <?php
@@ -95,6 +80,23 @@ if (!defined('ABSPATH')) {
                         }
                         ?>
                     </select>
+                </div>
+                <div class="sk-form-field">
+                    <label><?php esc_html_e('State', 'sk-multi-address'); ?></label>
+                    <select name="state" class="sk-state-select" required>
+                        <option value=""><?php esc_html_e('Select a state...', 'sk-multi-address'); ?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sk-form-row">
+                <div class="sk-form-field">
+                    <label><?php esc_html_e('Postcode', 'sk-multi-address'); ?></label>
+                    <input type="text" name="postcode" required>
+                </div>
+                <div class="sk-form-field">
+                    <label><?php esc_html_e('City', 'sk-multi-address'); ?></label>
+                    <input type="text" name="city" required>
                 </div>
             </div>
 

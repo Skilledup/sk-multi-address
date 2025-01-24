@@ -7,6 +7,46 @@ jQuery(function($) {
         minimumResultsForSearch: 0 // Always show search box
     });
 
+    // Initialize Select2 for state select
+    $('.sk-state-select').select2({
+        placeholder: 'Search for a state...',
+        allowClear: true,
+        width: '100%',
+        minimumResultsForSearch: 0
+    });
+
+    // Handle country change to update states
+    $('.sk-country-select').on('change', function() {
+        var countryCode = $(this).val();
+        var $stateField = $('.sk-state-select');
+        
+        if (!countryCode) {
+            return;
+        }
+
+        var data = {
+            action: 'sk_get_states',
+            country: countryCode,
+            nonce: skMultiAddress.nonce
+        };
+
+        $.post(skMultiAddress.ajax_url, data, function(response) {
+            if (response.success) {
+                var states = response.data;
+                $stateField.empty();
+                $stateField.append('<option value="">' + skMultiAddress.i18n.selectState + '</option>');
+                
+                $.each(states, function(code, name) {
+                    $stateField.append($('<option></option>')
+                        .attr('value', code)
+                        .text(name));
+                });
+                
+                $stateField.prop('disabled', false).trigger('change');
+            }
+        });
+    });
+
     // Handle address form submission
     $('#sk-new-address-form').on('submit', function(e) {
         e.preventDefault();
