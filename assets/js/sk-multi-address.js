@@ -18,9 +18,14 @@ jQuery(function($) {
     // Handle country change to update states
     $('.sk-country-select').on('change', function() {
         var countryCode = $(this).val();
-        var $stateField = $('.sk-state-select');
+        var $stateSelect = $('.sk-state-select');
         
         if (!countryCode) {
+            $stateSelect.prop('disabled', true)
+                       .prop('required', false)
+                       .empty()
+                       .append('<option value="">' + skMultiAddress.i18n.selectCountryFirst + '</option>')
+                       .trigger('change');
             return;
         }
 
@@ -33,16 +38,28 @@ jQuery(function($) {
         $.post(skMultiAddress.ajax_url, data, function(response) {
             if (response.success) {
                 var states = response.data;
-                $stateField.empty();
-                $stateField.append('<option value="">' + skMultiAddress.i18n.selectState + '</option>');
+                $stateSelect.empty();
                 
-                $.each(states, function(code, name) {
-                    $stateField.append($('<option></option>')
-                        .attr('value', code)
-                        .text(name));
-                });
-                
-                $stateField.prop('disabled', false).trigger('change');
+                if (Object.keys(states).length === 0) {
+                    // If country has no states, keep disabled with appropriate message
+                    $stateSelect.prop('disabled', true)
+                               .prop('required', false)
+                               .append('<option value="">-</option>')
+                               .trigger('change');
+                } else {
+                    // If country has states, enable and populate options
+                    $stateSelect.append('<option value="">' + skMultiAddress.i18n.selectState + '</option>');
+                    
+                    $.each(states, function(code, name) {
+                        $stateSelect.append($('<option></option>')
+                            .attr('value', code)
+                            .text(name));
+                    });
+                    
+                    $stateSelect.prop('disabled', false)
+                               .prop('required', true)
+                               .trigger('change');
+                }
             }
         });
     });
@@ -76,46 +93,80 @@ jQuery(function($) {
             }
         });
     });
-    // Handle address editing
-    $('.sk-edit-address').on('click', function() {
-        const addressItem = $(this).closest('.sk-address-item');
-        const addressId = addressItem.data('address-id');
+    // Handle edit address button click
+    $('.sk-edit-address').on('click', function(e) {
+        e.preventDefault();
+        var addressId = $(this).closest('.sk-address-item').data('address-id');
+        var form = $('#sk-new-address-form');
+        
+        var data = {
+            action: 'sk_get_address',
+            address_id: addressId,
+            nonce: skMultiAddress.nonce
+        };
 
-        // Get address data
-        $.ajax({
-            url: skMultiAddress.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'sk_get_address',
-                nonce: skMultiAddress.nonce,
-                address_id: addressId
-            },
-            success: function(response) {
-                if (response.success) {
-                    const address = response.data;
-                    
-                    // Fill form with address data
-                    const form = $('#sk-new-address-form');
-                    form.find('[name="first_name"]').val(address.first_name);
-                    form.find('[name="last_name"]').val(address.last_name);
-                    form.find('[name="email"]').val(address.email);
-                    form.find('[name="phone"]').val(address.phone);
-                    form.find('[name="address_1"]').val(address.address_1);
-                    form.find('[name="address_2"]').val(address.address_2);
-                    form.find('[name="city"]').val(address.city);
-                    form.find('[name="state"]').val(address.state);
-                    form.find('[name="postcode"]').val(address.postcode);
-                    form.find('[name="country"]').val(address.country);
-
-                    // Add address ID to form and change submit button text
-                    form.data('address-id', addressId);
-                    form.find('button[type="submit"]').text(skMultiAddress.i18n.updateAddress);
-                    
-                    // Scroll to form
-                    $('html, body').animate({
-                        scrollTop: form.offset().top - 100
-                    }, 500);
-                }
+        $.post(skMultiAddress.ajax_url, data, function(response) {
+            if (response.success) {
+                var address = response.data;
+                
+                // Update form title
+                $('#sk-form-title').text(skMultiAddress.i18n.updateAddress);
+                
+                // Set basic form values
+                form.find('[name="first_name"]').val(address.first_name);
+                form.find('[name="last_name"]').val(address.last_name);
+                form.find('[name="email"]').val(address.email);
+                form.find('[name="phone"]').val(address.phone);
+                form.find('[name="address_1"]').val(address.address_1);
+                form.find('[name="address_2"]').val(address.address_2);
+                form.find('[name="city"]').val(address.city);
+                form.find('[name="postcode"]').val(address.postcode);
+                
+                // First, load the states for the country
+                var stateData = {
+                    action: 'sk_get_states',
+                    country: address.country,
+                    nonce: skMultiAddress.nonce
+                };
+                
+                $.post(skMultiAddress.ajax_url, stateData, function(stateResponse) {
+                    if (stateResponse.success) {
+                        var $stateSelect = form.find('[name="state"]');
+                        var states = stateResponse.data;
+                        
+                        // Clear and populate state options
+                        $stateSelect.empty();
+                        
+                        if (Object.keys(states).length === 0) {
+                            $stateSelect.prop('disabled', true)
+                                      .prop('required', false)
+                                      .append('<option value="">-</option>');
+                        } else {
+                            $stateSelect.append('<option value="">' + skMultiAddress.i18n.selectState + '</option>');
+                            
+                            $.each(states, function(code, name) {
+                                $stateSelect.append($('<option></option>')
+                                    .attr('value', code)
+                                    .text(name));
+                            });
+                            
+                            $stateSelect.prop('disabled', false)
+                                      .prop('required', true);
+                        }
+                        
+                        // Now set both country and state values
+                        form.find('[name="country"]').val(address.country).trigger('change.select2');
+                        $stateSelect.val(address.state).trigger('change.select2');
+                    }
+                });
+                
+                // Add address ID to form
+                form.data('address-id', addressId);
+                
+                // Scroll to form
+                $('html, body').animate({
+                    scrollTop: form.offset().top - 100
+                }, 500);
             }
         });
     });

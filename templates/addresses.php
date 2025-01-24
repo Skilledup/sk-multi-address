@@ -81,10 +81,10 @@ if (!defined('ABSPATH')) {
                         ?>
                     </select>
                 </div>
-                <div class="sk-form-field">
+                <div class="sk-form-field sk-state-field">
                     <label><?php esc_html_e('State', 'sk-multi-address'); ?></label>
-                    <select name="state" class="sk-state-select" required>
-                        <option value=""><?php esc_html_e('Select a state...', 'sk-multi-address'); ?></option>
+                    <select name="state" class="sk-state-select" disabled required>
+                        <option value=""><?php esc_html_e('Select a country first...', 'sk-multi-address'); ?></option>
                     </select>
                 </div>
             </div>

@@ -89,7 +89,8 @@ class SK_Multiple_Addresses {
                 'i18n' => array(
                     'confirmDelete' => __('Are you sure you want to delete this address?', 'sk-multi-address'),
                     'updateAddress' => __('Update Address', 'sk-multi-address'),
-                    'selectState' => __('Select a state...', 'sk-multi-address')
+                    'selectState' => __('Select a state...', 'sk-multi-address'),
+                    'selectCountryFirst' => __('Select a country first...', 'sk-multi-address')
                 )
             ));
 
