@@ -58,12 +58,12 @@ if (!defined('ABSPATH')) {
                 </div>
             </div>
 
-            <div class="sk-form-field">
+            <div class="sk-form-field sk-single-line">
                 <label><?php esc_html_e('Address Line 1', 'sk-multi-address'); ?></label>
                 <input type="text" name="address_1" required>
             </div>
 
-            <div class="sk-form-field">
+            <div class="sk-form-field sk-single-line">
                 <label><?php esc_html_e('Address Line 2', 'sk-multi-address'); ?></label>
                 <input type="text" name="address_2">
             </div>

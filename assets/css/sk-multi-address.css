@@ -17,6 +17,10 @@
     align-items: start;
 }
 
+.wd-my-account-links .addresses-link a::before {
+    content: "\f139";
+}
+
 .sk-address-content {
     flex: 1;
     line-height: 1.5;
@@ -33,6 +37,10 @@
 .sk-form-row {
     display: flex;
     gap: 20px;
+    margin-bottom: 15px;
+}
+
+.sk-single-line {
     margin-bottom: 15px;
 }
 
@@ -65,10 +73,6 @@
     width: 100%;
     padding: 8px;
     margin-top: 10px;
-}
-
-#sk-new-address-form button[type="submit"] {
-    margin-top: 20px;
 }
 
 /* Select2 Custom Styles */
