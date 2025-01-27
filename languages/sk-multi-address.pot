@@ -1,0 +1,159 @@
+# Copyright (C) 2025 Mohammad Anbarestany
+# This file is distributed under the same license as the SK Multiple Addresses for WoodMart plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: SK Multiple Addresses for WoodMart 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sk-multi-address\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-27T15:49:25+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: sk-multi-address\n"
+
+#. Plugin Name of the plugin
+#: sk-multi-address.php
+msgid "SK Multiple Addresses for WoodMart"
+msgstr ""
+
+#. Description of the plugin
+#: sk-multi-address.php
+msgid "Enhance WoodMart theme with multiple address management - lets customers save, edit and select from multiple shipping/billing addresses during checkout"
+msgstr ""
+
+#. Author of the plugin
+#: sk-multi-address.php
+msgid "Mohammad Anbarestany"
+msgstr ""
+
+#. Author URI of the plugin
+#: sk-multi-address.php
+msgid "https://anbarestany.ir"
+msgstr ""
+
+#: sk-multi-address.php:56
+#: templates/addresses.php:8
+msgid "My Addresses"
+msgstr ""
+
+#: sk-multi-address.php:90
+msgid "Are you sure you want to delete this address?"
+msgstr ""
+
+#: sk-multi-address.php:91
+msgid "Update Address"
+msgstr ""
+
+#: sk-multi-address.php:92
+msgid "Select a state..."
+msgstr ""
+
+#: sk-multi-address.php:93
+#: templates/addresses.php:88
+msgid "Select a country first..."
+msgstr ""
+
+#: sk-multi-address.php:118
+#: sk-multi-address.php:148
+#: sk-multi-address.php:162
+msgid "Address not found"
+msgstr ""
+
+#: sk-multi-address.php:129
+msgid "Address updated successfully"
+msgstr ""
+
+#: sk-multi-address.php:130
+msgid "Address saved successfully"
+msgstr ""
+
+#: sk-multi-address.php:145
+msgid "Address deleted successfully"
+msgstr ""
+
+#: templates/addresses.php:17
+msgid "Email:"
+msgstr ""
+
+#: templates/addresses.php:18
+msgid "Phone:"
+msgstr ""
+
+#: templates/addresses.php:19
+msgid "Address:"
+msgstr ""
+
+#: templates/addresses.php:28
+msgid "Edit"
+msgstr ""
+
+#: templates/addresses.php:29
+msgid "Delete"
+msgstr ""
+
+#: templates/addresses.php:37
+msgid "Add New Address"
+msgstr ""
+
+#: templates/addresses.php:41
+msgid "First Name"
+msgstr ""
+
+#: templates/addresses.php:45
+msgid "Last Name"
+msgstr ""
+
+#: templates/addresses.php:52
+msgid "Email"
+msgstr ""
+
+#: templates/addresses.php:56
+msgid "Phone"
+msgstr ""
+
+#: templates/addresses.php:62
+msgid "Address Line 1"
+msgstr ""
+
+#: templates/addresses.php:67
+msgid "Address Line 2"
+msgstr ""
+
+#: templates/addresses.php:73
+msgid "Country"
+msgstr ""
+
+#: templates/addresses.php:75
+msgid "Select a country..."
+msgstr ""
+
+#: templates/addresses.php:86
+msgid "State"
+msgstr ""
+
+#: templates/addresses.php:96
+msgid "Postcode"
+msgstr ""
+
+#: templates/addresses.php:100
+msgid "City"
+msgstr ""
+
+#: templates/addresses.php:106
+msgid "Save Address"
+msgstr ""
+
+#: templates/addresses.php:107
+msgid "Cancel"
+msgstr ""
+
+#: templates/checkout-address-selector.php:8
+msgid "Select from saved addresses"
+msgstr ""
+
+#: templates/checkout-address-selector.php:10
+msgid "Choose an address..."
+msgstr ""
