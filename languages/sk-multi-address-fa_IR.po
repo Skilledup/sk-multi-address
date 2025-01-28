@@ -160,3 +160,9 @@ msgstr "استفاده از آدرس های ذخیره شده"
 #: templates/checkout-address-selector.php:10
 msgid "Choose an address..."
 msgstr "انتخاب آدرس ..."
+
+msgid "Address Name (optional)"
+msgstr "نام آدرس (اختیاری)"
+
+msgid "e.g., Home, Work, etc."
+msgstr "مثال: خانه، محل کار و غیره"

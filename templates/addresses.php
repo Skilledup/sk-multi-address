@@ -13,6 +13,9 @@ if (!defined('ABSPATH')) {
                 <div class="sk-address-item" data-address-id="<?php echo esc_attr($address_id); ?>">
                     <div class="sk-address-content">
                         <?php
+                        if (!empty($address['address_name'])) {
+                            echo wp_kses_post('<strong>' . $address['address_name'] . '</strong><br>');
+                        }
                         echo wp_kses_post($address['first_name'] . ' ' . $address['last_name'] . '<br>');
                         echo wp_kses_post('<strong>' . __('Email:', 'sk-multi-address') . '</strong> ' . $address['email'] . '<br>');
                         echo wp_kses_post('<strong>' . __('Phone:', 'sk-multi-address') . '</strong> ' . $address['phone'] . '<br>');
@@ -56,6 +59,11 @@ if (!defined('ABSPATH')) {
                     <label><?php esc_html_e('Phone', 'sk-multi-address'); ?></label>
                     <input type="tel" name="phone" required>
                 </div>
+            </div>
+
+            <div class="sk-form-field sk-single-line">
+                <label><?php esc_html_e('Address Name (optional)', 'sk-multi-address'); ?></label>
+                <input type="text" name="address_name" placeholder="<?php esc_html_e('e.g., Home, Work, etc.', 'sk-multi-address'); ?>">
             </div>
 
             <div class="sk-form-field sk-single-line">

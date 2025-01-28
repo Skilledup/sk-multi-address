@@ -12,7 +12,8 @@ if (!defined('ABSPATH')) {
             <option value="<?php echo esc_attr($address_id); ?>">
                 <?php
                 echo esc_html(sprintf(
-                    '%s %s, %s',
+                    '%s%s %s, %s',
+                    !empty($address['address_name']) ? "(" . $address['address_name'] . ") " : "",
                     $address['first_name'],
                     $address['last_name'],
                     $address['address_1']

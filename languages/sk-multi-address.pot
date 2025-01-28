@@ -157,3 +157,9 @@ msgstr ""
 #: templates/checkout-address-selector.php:10
 msgid "Choose an address..."
 msgstr ""
+
+msgid "Address Name (optional)"
+msgstr ""
+
+msgid "e.g., Home, Work, etc."
+msgstr ""
