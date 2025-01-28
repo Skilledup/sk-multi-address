@@ -24,6 +24,9 @@ if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get
 class SK_Multiple_Addresses {
     
     public function __construct() {
+        // Load text domain for translations
+        add_action('plugins_loaded', array($this, 'load_plugin_textdomain'));
+        
         // Add menu item to My Account page
         add_filter('woocommerce_account_menu_items', array($this, 'add_addresses_menu_item'));
         add_action('init', array($this, 'add_addresses_endpoint'));
@@ -45,6 +48,14 @@ class SK_Multiple_Addresses {
         // Add this to your main plugin class
         add_action('wp_ajax_sk_get_states', array($this, 'get_states_ajax'));
         add_action('wp_ajax_nopriv_sk_get_states', array($this, 'get_states_ajax'));
+    }
+
+    public function load_plugin_textdomain() {
+        load_plugin_textdomain(
+            'sk-multi-address',
+            false,
+            dirname(plugin_basename(__FILE__)) . '/languages'
+        );
     }
 
     public function add_addresses_endpoint() {

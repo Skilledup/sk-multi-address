@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sk-multi-"
 "address\n"
 "POT-Creation-Date: 2025-01-27T15:49:25+00:00\n"
-"PO-Revision-Date: 2025-01-27 23:20+0330\n"
+"PO-Revision-Date: 2025-01-28 19:47+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -115,48 +115,48 @@ msgstr "ایمیل"
 
 #: templates/addresses.php:56
 msgid "Phone"
-msgstr ""
+msgstr "تلفن"
 
 #: templates/addresses.php:62
 msgid "Address Line 1"
-msgstr ""
+msgstr "آدرس"
 
 #: templates/addresses.php:67
 msgid "Address Line 2"
-msgstr ""
+msgstr "ادامه آدرس"
 
 #: templates/addresses.php:73
 msgid "Country"
-msgstr ""
+msgstr "کشور"
 
 #: templates/addresses.php:75
 msgid "Select a country..."
-msgstr ""
+msgstr "انتخاب یک کشور..."
 
 #: templates/addresses.php:86
 msgid "State"
-msgstr ""
+msgstr "استان"
 
 #: templates/addresses.php:96
 msgid "Postcode"
-msgstr ""
+msgstr "کد پستی"
 
 #: templates/addresses.php:100
 msgid "City"
-msgstr ""
+msgstr "شهر"
 
 #: templates/addresses.php:106
 msgid "Save Address"
-msgstr ""
+msgstr "ذخیره آدرس"
 
 #: templates/addresses.php:107
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 #: templates/checkout-address-selector.php:8
 msgid "Select from saved addresses"
-msgstr ""
+msgstr "استفاده از آدرس های ذخیره شده"
 
 #: templates/checkout-address-selector.php:10
 msgid "Choose an address..."
-msgstr ""
+msgstr "انتخاب آدرس ..."
