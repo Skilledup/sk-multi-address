@@ -4,19 +4,12 @@ Enhance WoodMart theme with multiple address management - lets customers save, e
 
 ## Features
 
-- Save multiple shipping and billing addresses
-- Edit existing addresses
-- Delete saved addresses
-- Quickly select saved addresses during checkout
-- Name addresses for easy identification (e.g., "Home", "Work")
-- Full integration with WooCommerce checkout
-- Dynamic state/province selector based on country selection
-- Mobile-responsive design
-- Select2 enhanced dropdowns for better user experience
-- Multilingual support with full translation capability
-- AJAX-powered for smooth user experience
-- Compatible with WoodMart theme
-- Compatible with Gutenberg (Soon)
+- Multiple address management (save, edit, delete)
+- Quick address selection at checkout with custom naming (Home, Work, etc.)
+- Seamless WooCommerce integration with dynamic location fields
+- Mobile-friendly with enhanced UI elements (Select2 dropdowns)
+- Full multilingual support and AJAX functionality
+- WoodMart theme compatible (Gutenberg support coming soon)
 
 ## Requirements
 
