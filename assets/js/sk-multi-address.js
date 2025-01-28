@@ -1,7 +1,7 @@
 jQuery(function($) {
     // Initialize Select2 for country select
     $('.sk-country-select').select2({
-        placeholder: 'Search for a country...',
+        placeholder: skMultiAddress.i18n.selectCountry,
         allowClear: true,
         width: '100%',
         minimumResultsForSearch: 0 // Always show search box
@@ -9,7 +9,7 @@ jQuery(function($) {
 
     // Initialize Select2 for state select
     $('.sk-state-select').select2({
-        placeholder: 'Search for a state...',
+        placeholder: skMultiAddress.i18n.selectState,
         allowClear: true,
         width: '100%',
         minimumResultsForSearch: 0
