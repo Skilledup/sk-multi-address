@@ -53,7 +53,7 @@ if (!defined('ABSPATH')) {
             <div class="sk-form-row">
                 <div class="sk-form-field">
                     <label><?php esc_html_e('Email', 'sk-multi-address'); ?></label>
-                    <input type="email" name="email" required>
+                    <input type="email" name="email">
                 </div>
                 <div class="sk-form-field">
                     <label><?php esc_html_e('Phone', 'sk-multi-address'); ?></label>
@@ -77,23 +77,38 @@ if (!defined('ABSPATH')) {
             </div>
 
             <div class="sk-form-row">
-                <div class="sk-form-field">
-                    <label><?php esc_html_e('Country', 'sk-multi-address'); ?></label>
-                    <select name="country" class="sk-country-select" required>
-                        <option value=""><?php esc_html_e('Select a country...', 'sk-multi-address'); ?></option>
-                        <?php
-                        $countries_obj = new WC_Countries();
-                        $countries = $countries_obj->get_countries();
-                        foreach ($countries as $code => $name) {
-                            echo '<option value="' . esc_attr($code) . '">' . esc_html($name) . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
+                <?php
+                $countries_obj = new WC_Countries();
+                $allowed_countries = $countries_obj->get_allowed_countries();
+                
+                if (count($allowed_countries) > 1) {
+                    // Show country selector if multiple countries are allowed
+                    ?>
+                    <div class="sk-form-field">
+                        <label><?php esc_html_e('Country', 'sk-multi-address'); ?></label>
+                        <select name="country" class="sk-country-select" required>
+                            <option value=""><?php esc_html_e('Select a country...', 'sk-multi-address'); ?></option>
+                            <?php
+                            foreach ($allowed_countries as $code => $name) {
+                                echo '<option value="' . esc_attr($code) . '">' . esc_html($name) . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                <?php } else { 
+                    // If only one country is allowed, use a hidden input
+                    $country_code = array_key_first($allowed_countries);
+                    ?>
+                    <input type="hidden" name="country" value="<?php echo esc_attr($country_code); ?>">
+                <?php } ?>
                 <div class="sk-form-field sk-state-field">
                     <label><?php esc_html_e('State', 'sk-multi-address'); ?></label>
-                    <select name="state" class="sk-state-select" disabled required>
-                        <option value=""><?php esc_html_e('Select a country first...', 'sk-multi-address'); ?></option>
+                    <select name="state" class="sk-state-select" <?php echo (count($allowed_countries) === 1 ? '' : 'disabled'); ?> required>
+                        <option value=""><?php 
+                            echo count($allowed_countries) === 1 
+                                ? esc_html__('Select a state...', 'sk-multi-address')
+                                : esc_html__('Select a country first...', 'sk-multi-address'); 
+                        ?></option>
                     </select>
                     <div class="sk-loading-spinner"></div>
                 </div>

@@ -15,9 +15,15 @@ jQuery(function($) {
         minimumResultsForSearch: 0
     });
 
-    // Handle country change to update states
-    $('.sk-country-select').on('change', function() {
-        var countryCode = $(this).val();
+    // If there's a hidden country input (single country case), trigger state loading
+    var $hiddenCountry = $('input[type="hidden"][name="country"]');
+    if ($hiddenCountry.length) {
+        var countryCode = $hiddenCountry.val();
+        loadStates(countryCode);
+    }
+
+    // Create a reusable function for loading states
+    function loadStates(countryCode) {
         var $stateField = $('.sk-state-field');
         var $stateSelect = $('.sk-state-select');
         
@@ -67,6 +73,11 @@ jQuery(function($) {
             // Remove loading state
             $stateField.removeClass('loading');
         });
+    }
+
+    // Modify the existing country change handler to use the new function
+    $('.sk-country-select').on('change', function() {
+        loadStates($(this).val());
     });
 
     // Handle address form submission
