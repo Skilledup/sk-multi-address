@@ -1,12 +1,12 @@
 # Copyright (C) 2025 Mohammad Anbarestany
-# This file is distributed under the same license as the SK Multiple Addresses for WoodMart plugin.
+# This file is distributed under the same license as the SK Multiple Addresses for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: SK Multiple Addresses for WoodMart 1.0.0\n"
+"Project-Id-Version: SK Multiple Addresses for WooCommerce 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sk-multi-"
 "address\n"
 "POT-Creation-Date: 2025-01-27T15:49:25+00:00\n"
-"PO-Revision-Date: 2025-01-28 19:47+0330\n"
+"PO-Revision-Date: 2025-01-29 19:43+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -18,18 +18,18 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #: sk-multi-address.php
-msgid "SK Multiple Addresses for WoodMart"
-msgstr "آدرس های متعدد برای WoodMart"
+msgid "SK Multiple Addresses for WooCommerce"
+msgstr "آدرس های متعدد برای WooCommerce"
 
 #. Description of the plugin
 #: sk-multi-address.php
 msgid ""
-"Enhance WoodMart theme with multiple address management - lets customers "
+"Enhance WooCommerce with multiple address management - lets customers "
 "save, edit and select from multiple shipping/billing addresses during "
 "checkout"
 msgstr ""
 "به مشتریان امکان می‌دهد در حین پرداخت، چندین آدرس حمل و نقل/صورت‌حساب را "
-"ذخیره، ویرایش و انتخاب کنند."
+"ذخیره، ویرایش و انتخاب کنند"
 
 #. Author of the plugin
 #: sk-multi-address.php
@@ -55,7 +55,7 @@ msgstr "بروزرسانی آدرس"
 
 #: sk-multi-address.php:92
 msgid "Select a state..."
-msgstr " یک استان انتخاب کنید..."
+msgstr "یک استان انتخاب کنید..."
 
 #: sk-multi-address.php:93 templates/addresses.php:88
 msgid "Select a country first..."
@@ -165,4 +165,4 @@ msgid "Address Name (optional)"
 msgstr "نام آدرس (اختیاری)"
 
 msgid "e.g., Home, Work, etc."
-msgstr "مثال: خانه، محل کار و غیره"
+msgstr "مثال: خانه، محل کار و غیره."

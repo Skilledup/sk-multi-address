@@ -1,8 +1,8 @@
 # Copyright (C) 2025 Mohammad Anbarestany
-# This file is distributed under the same license as the SK Multiple Addresses for WoodMart plugin.
+# This file is distributed under the same license as the SK Multiple Addresses for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: SK Multiple Addresses for WoodMart 1.0.0\n"
+"Project-Id-Version: SK Multiple Addresses for WooCommerce 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sk-multi-address\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,12 +16,12 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #: sk-multi-address.php
-msgid "SK Multiple Addresses for WoodMart"
+msgid "SK Multiple Addresses for WooCommerce"
 msgstr ""
 
 #. Description of the plugin
 #: sk-multi-address.php
-msgid "Enhance WoodMart theme with multiple address management - lets customers save, edit and select from multiple shipping/billing addresses during checkout"
+msgid "Enhance WooCommerce with multiple address management - lets customers save, edit and select from multiple shipping/billing addresses during checkout"
 msgstr ""
 
 #. Author of the plugin

@@ -1,6 +1,6 @@
-# SK Multiple Addresses for WoodMart
+# SK Multiple Addresses for WooCommerce
 
-Enhance WoodMart theme with multiple address management - lets customers save, edit and select from multiple shipping/billing addresses during checkout.
+Enhance WooCommerce with multiple address management - lets customers save, edit and select from multiple shipping/billing addresses during checkout.
 
 ## Features
 
@@ -9,12 +9,11 @@ Enhance WoodMart theme with multiple address management - lets customers save, e
 - Seamless WooCommerce integration with dynamic location fields
 - Mobile-friendly with enhanced UI elements (Select2 dropdowns)
 - Full multilingual support and AJAX functionality
-- WoodMart theme compatible (Gutenberg support coming soon)
+- Gutenberg support coming soon
 
 ## Requirements
 
 - WooCommerce plugin
-- WoodMart theme
 
 ## Installation
 
