@@ -9,6 +9,7 @@ Enhance WooCommerce with multiple address management - lets customers save, edit
 - Seamless WooCommerce integration with dynamic location fields
 - Mobile-friendly with enhanced UI elements (Select2 dropdowns)
 - Full multilingual support and AJAX functionality
+- Handles storing Arabic/Persian numbers (Phone and Postcode)
 - Gutenberg support coming soon
 
 ## Requirements
@@ -33,7 +34,7 @@ Enhance WooCommerce with multiple address management - lets customers save, edit
 
 ### For Developers
 
-The plugin's Admin will be available soon...
+To Manage Address Fields go to WooCommerce → Multiple Addresses, then select which field you like to show up.
 I recommend you to disable woocommerce own Addresses menu and use this plugin instead. go to WooCommerce → Settings → Advanced → Account endpoints and disable "Addresses" menu.
 
 
