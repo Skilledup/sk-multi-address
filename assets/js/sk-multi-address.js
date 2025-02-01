@@ -238,7 +238,7 @@ jQuery(function($) {
                 if (response.success) {
                     const address = response.data;
                     
-                    // Fill billing fields
+                    // Fill all fields except state
                     $('#billing_first_name').val(address.first_name);
                     $('#billing_last_name').val(address.last_name);
                     $('#billing_email').val(address.email);
@@ -246,9 +246,15 @@ jQuery(function($) {
                     $('#billing_address_1').val(address.address_1);
                     $('#billing_address_2').val(address.address_2);
                     $('#billing_city').val(address.city);
-                    $('#billing_state').val(address.state);
                     $('#billing_postcode').val(address.postcode);
+                    
+                    // Set country and wait for its change event to complete before setting state
                     $('#billing_country').val(address.country).trigger('change');
+                    
+                    // Wait for country change to complete then set state
+                    setTimeout(function() {
+                        $('#billing_state').val(address.state).trigger('change');
+                    }, 500);
                 }
             }
         });
