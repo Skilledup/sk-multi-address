@@ -1,4 +1,31 @@
 jQuery(function($) {
+    // Function to wait for the state field to be populated
+    function waitForState(stateValue, maxWait = 5000) {
+        return new Promise((resolve, reject) => {
+            const startTime = Date.now();
+            
+            const observer = new MutationObserver((mutations, obs) => {
+                const stateField = $('#billing_state');
+                
+                if (Date.now() - startTime > maxWait) {
+                    obs.disconnect();
+                    reject(new Error('Timeout waiting for state field'));
+                    return;
+                }
+
+                if (stateField.length && stateField.find('option').length > 1) {
+                    obs.disconnect();
+                    resolve();
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    }
+
     // Initialize Select2 for country select
     $('.sk-country-select').select2({
         placeholder: skMultiAddress.i18n.selectCountry,
@@ -221,7 +248,7 @@ jQuery(function($) {
         });
     });
 
-    // Handle address selection in checkout
+    // Modify the address selection handler
     $('#sk-saved-addresses-select').on('change', function() {
         const addressId = $(this).val();
         if (!addressId) return;
@@ -238,7 +265,7 @@ jQuery(function($) {
                 if (response.success) {
                     const address = response.data;
                     
-                    // Fill all fields except state
+                    // Fill all fields except country and state
                     $('#billing_first_name').val(address.first_name);
                     $('#billing_last_name').val(address.last_name);
                     $('#billing_email').val(address.email);
@@ -248,13 +275,18 @@ jQuery(function($) {
                     $('#billing_city').val(address.city);
                     $('#billing_postcode').val(address.postcode);
                     
-                    // Set country and wait for its change event to complete before setting state
+                    // Set country and handle state
                     $('#billing_country').val(address.country).trigger('change');
                     
-                    // Wait for country change to complete then set state
-                    setTimeout(function() {
-                        $('#billing_state').val(address.state).trigger('change');
-                    }, 500);
+                    waitForState(address.state)
+                        .then(() => {
+                            $('#billing_state').val(address.state).trigger('change');
+                        })
+                        .catch(error => {
+                            console.warn('Failed to set state automatically:', error);
+                            // Optionally show user feedback
+                            alert(skMultiAddress.i18n.selectStateManually);
+                        });
                 }
             }
         });

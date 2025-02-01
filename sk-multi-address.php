@@ -106,7 +106,8 @@ class SK_Multiple_Addresses {
                     'addNewAddress' => __('Add New Address', 'sk-multi-address'),
                     'selectCountry' => __('Select a country...', 'sk-multi-address'),
                     'selectState' => __('Select a state...', 'sk-multi-address'),
-                    'selectCountryFirst' => __('Select a country first...', 'sk-multi-address')
+                    'selectCountryFirst' => __('Select a country first...', 'sk-multi-address'),
+                    'selectStateManually' => __('Please select your state manually', 'sk-multi-address'),
                 )
             ));
 
