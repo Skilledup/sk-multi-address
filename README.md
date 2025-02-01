@@ -34,8 +34,8 @@ Enhance WooCommerce with multiple address management - lets customers save, edit
 
 ### For Developers
 
-To Manage Address Fields go to WooCommerce → Multiple Addresses, then select which field you like to show up.
-I recommend you to disable woocommerce own Addresses menu and use this plugin instead. go to WooCommerce → Settings → Advanced → Account endpoints and disable "Addresses" menu.
+* To Manage Address Fields go to WooCommerce → Multiple Addresses, then select which field you like to show up.
+* Note: I recommend you to disable woocommerce own Addresses menu and use this plugin instead. go to WooCommerce → Settings → Advanced → Account endpoints and disable "Addresses" menu.
 
 
 ## Support
