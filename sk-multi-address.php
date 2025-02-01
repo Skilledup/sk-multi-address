@@ -116,10 +116,31 @@ class SK_Multiple_Addresses {
         }
     }
 
+    private function convert_numbers_to_latin($string) {
+        $arabic_eastern = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+        $arabic_western = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        
+        // First convert eastern Arabic numbers
+        $string = str_replace($arabic_eastern, $arabic_western, $string);
+        
+        // Also convert Persian numbers if present
+        $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        return str_replace($persian, $arabic_western, $string);
+    }
+
     public function save_address() {
         check_ajax_referer('sk-multi-address', 'nonce');
         
         $address_data = $_POST['address'];
+        
+        // Convert phone and postcode numbers to Latin
+        if (isset($address_data['phone'])) {
+            $address_data['phone'] = $this->convert_numbers_to_latin($address_data['phone']);
+        }
+        if (isset($address_data['postcode'])) {
+            $address_data['postcode'] = $this->convert_numbers_to_latin($address_data['postcode']);
+        }
+        
         $user_id = get_current_user_id();
         
         $saved_addresses = get_user_meta($user_id, 'sk_saved_addresses', true);
