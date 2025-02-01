@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: SK Multiple Addresses for WoodMart
+ * Plugin Name: SK Multiple Addresses for WooCommerce
  * Plugin URI: 
- * Description: Enhance WoodMart theme with multiple address management - lets customers save, edit and select from multiple shipping/billing addresses during checkout
+ * Description: Enhance WooCommerce with multiple address management - lets customers save, edit and select from multiple shipping/billing addresses during checkout
  * Version: 1.0.0
  * Author: Mohammad Anbarestany
  * Author URI: https://anbarestany.ir
@@ -20,6 +20,9 @@ if (!defined('ABSPATH')) {
 if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
     return;
 }
+
+// Add after the initial plugin checks
+require_once plugin_dir_path(__FILE__) . 'includes/admin/settings.php';
 
 class SK_Multiple_Addresses {
     
@@ -199,6 +202,20 @@ class SK_Multiple_Addresses {
         } else {
             wp_send_json_success($states);
         }
+    }
+
+    public static function is_field_visible($field) {
+        $options = get_option('sk_multi_address_settings', array());
+        $default_visible = array(
+            'address_name' => 1,
+            'email' => 1,
+            'phone' => 1,
+            'address_2' => 1
+        );
+        
+        return isset($options['show_' . $field]) ? 
+            (bool) $options['show_' . $field] : 
+            $default_visible[$field];
     }
 }
 
