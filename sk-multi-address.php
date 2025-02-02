@@ -24,6 +24,8 @@ if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get
 // Add after the initial plugin checks
 require_once plugin_dir_path(__FILE__) . 'includes/admin/settings.php';
 
+register_activation_hook(__FILE__, array('SK_Multi_Address_Settings', 'set_defaults'));
+
 class SK_Multiple_Addresses {
     
     public function __construct() {
