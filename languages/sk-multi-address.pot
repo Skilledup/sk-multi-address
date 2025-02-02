@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-27T15:49:25+00:00\n"
+"POT-Creation-Date: 2025-02-02T17:04:11+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: sk-multi-address\n"
@@ -34,119 +34,171 @@ msgstr ""
 msgid "https://anbarestany.ir"
 msgstr ""
 
-#: sk-multi-address.php:56
+#: includes/admin/settings.php:17
+#: includes/admin/settings.php:29
+msgid "Multiple Addresses Settings"
+msgstr ""
+
+#: includes/admin/settings.php:18
+msgid "Multiple Addresses"
+msgstr ""
+
+#: includes/admin/settings.php:50
+msgid "Address Fields Settings"
+msgstr ""
+
+#: includes/admin/settings.php:56
+msgid "Address Name Field"
+msgstr ""
+
+#: includes/admin/settings.php:57
+msgid "Email Field"
+msgstr ""
+
+#: includes/admin/settings.php:58
+msgid "Phone Field"
+msgstr ""
+
+#: includes/admin/settings.php:59
+msgid "Address Line 2 Field"
+msgstr ""
+
+#: includes/admin/settings.php:86
+msgid "Choose which address fields to display in the form:"
+msgstr ""
+
+#: includes/admin/settings.php:98
+msgid "Show this field"
+msgstr ""
+
+#: sk-multi-address.php:70
 #: templates/addresses.php:8
 msgid "My Addresses"
 msgstr ""
 
-#: sk-multi-address.php:90
+#: sk-multi-address.php:104
 msgid "Are you sure you want to delete this address?"
 msgstr ""
 
-#: sk-multi-address.php:91
+#: sk-multi-address.php:105
 msgid "Update Address"
 msgstr ""
 
-#: sk-multi-address.php:92
-msgid "Select a state..."
-msgstr ""
-
-#: sk-multi-address.php:93
-#: templates/addresses.php:88
-msgid "Select a country first..."
-msgstr ""
-
-#: sk-multi-address.php:118
-#: sk-multi-address.php:148
-#: sk-multi-address.php:162
-msgid "Address not found"
-msgstr ""
-
-#: sk-multi-address.php:129
-msgid "Address updated successfully"
-msgstr ""
-
-#: sk-multi-address.php:130
-msgid "Address saved successfully"
-msgstr ""
-
-#: sk-multi-address.php:145
-msgid "Address deleted successfully"
-msgstr ""
-
-#: templates/addresses.php:17
-msgid "Email:"
-msgstr ""
-
-#: templates/addresses.php:18
-msgid "Phone:"
-msgstr ""
-
-#: templates/addresses.php:19
-msgid "Address:"
-msgstr ""
-
-#: templates/addresses.php:28
-msgid "Edit"
-msgstr ""
-
-#: templates/addresses.php:29
-msgid "Delete"
-msgstr ""
-
-#: templates/addresses.php:37
+#: sk-multi-address.php:106
+#: templates/addresses.php:49
 msgid "Add New Address"
 msgstr ""
 
-#: templates/addresses.php:41
-msgid "First Name"
-msgstr ""
-
-#: templates/addresses.php:45
-msgid "Last Name"
-msgstr ""
-
-#: templates/addresses.php:52
-msgid "Email"
-msgstr ""
-
-#: templates/addresses.php:56
-msgid "Phone"
-msgstr ""
-
-#: templates/addresses.php:62
-msgid "Address Line 1"
-msgstr ""
-
-#: templates/addresses.php:67
-msgid "Address Line 2"
-msgstr ""
-
-#: templates/addresses.php:73
-msgid "Country"
-msgstr ""
-
-#: templates/addresses.php:75
+#: sk-multi-address.php:107
+#: templates/addresses.php:109
 msgid "Select a country..."
 msgstr ""
 
-#: templates/addresses.php:86
-msgid "State"
+#: sk-multi-address.php:108
+#: templates/addresses.php:128
+msgid "Select a state..."
 msgstr ""
 
-#: templates/addresses.php:96
-msgid "Postcode"
+#: sk-multi-address.php:109
+#: templates/addresses.php:129
+msgid "Select a country first..."
 msgstr ""
 
-#: templates/addresses.php:100
-msgid "City"
+#: sk-multi-address.php:110
+msgid "Please select your state manually"
 msgstr ""
 
-#: templates/addresses.php:106
-msgid "Save Address"
+#: sk-multi-address.php:156
+#: sk-multi-address.php:186
+#: sk-multi-address.php:200
+msgid "Address not found"
+msgstr ""
+
+#: sk-multi-address.php:167
+msgid "Address updated successfully"
+msgstr ""
+
+#: sk-multi-address.php:168
+msgid "Address saved successfully"
+msgstr ""
+
+#: sk-multi-address.php:183
+msgid "Address deleted successfully"
+msgstr ""
+
+#: templates/addresses.php:22
+msgid "Email:"
+msgstr ""
+
+#: templates/addresses.php:26
+msgid "Phone:"
+msgstr ""
+
+#: templates/addresses.php:29
+msgid "Address:"
+msgstr ""
+
+#: templates/addresses.php:40
+msgid "Edit"
+msgstr ""
+
+#: templates/addresses.php:41
+msgid "Delete"
+msgstr ""
+
+#: templates/addresses.php:53
+msgid "First Name"
+msgstr ""
+
+#: templates/addresses.php:57
+msgid "Last Name"
+msgstr ""
+
+#: templates/addresses.php:66
+msgid "Email"
+msgstr ""
+
+#: templates/addresses.php:72
+msgid "Phone"
+msgstr ""
+
+#: templates/addresses.php:81
+msgid "Address Name (optional)"
+msgstr ""
+
+#: templates/addresses.php:82
+msgid "e.g., Home, Work, etc."
+msgstr ""
+
+#: templates/addresses.php:87
+msgid "Address Line 1"
+msgstr ""
+
+#: templates/addresses.php:93
+msgid "Address Line 2"
 msgstr ""
 
 #: templates/addresses.php:107
+msgid "Country"
+msgstr ""
+
+#: templates/addresses.php:124
+msgid "State"
+msgstr ""
+
+#: templates/addresses.php:138
+msgid "Postcode"
+msgstr ""
+
+#: templates/addresses.php:142
+msgid "City"
+msgstr ""
+
+#: templates/addresses.php:148
+msgid "Save Address"
+msgstr ""
+
+#: templates/addresses.php:149
 msgid "Cancel"
 msgstr ""
 
@@ -156,10 +208,4 @@ msgstr ""
 
 #: templates/checkout-address-selector.php:10
 msgid "Choose an address..."
-msgstr ""
-
-msgid "Address Name (optional)"
-msgstr ""
-
-msgid "e.g., Home, Work, etc."
 msgstr ""

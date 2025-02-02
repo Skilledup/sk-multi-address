@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: SK Multiple Addresses for WooCommerce 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sk-multi-"
 "address\n"
-"POT-Creation-Date: 2025-01-27T15:49:25+00:00\n"
-"PO-Revision-Date: 2025-01-29 19:43+0330\n"
+"POT-Creation-Date: 2025-02-02T17:04:11+00:00\n"
+"PO-Revision-Date: 2025-02-02 21:10+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -19,14 +19,13 @@ msgstr ""
 #. Plugin Name of the plugin
 #: sk-multi-address.php
 msgid "SK Multiple Addresses for WooCommerce"
-msgstr "آدرس های متعدد برای WooCommerce"
+msgstr "مدیریت آدرس برای ووکامرس"
 
 #. Description of the plugin
 #: sk-multi-address.php
 msgid ""
-"Enhance WooCommerce with multiple address management - lets customers "
-"save, edit and select from multiple shipping/billing addresses during "
-"checkout"
+"Enhance WooCommerce with multiple address management - lets customers save, "
+"edit and select from multiple shipping/billing addresses during checkout"
 msgstr ""
 "به مشتریان امکان می‌دهد در حین پرداخت، چندین آدرس حمل و نقل/صورت‌حساب را "
 "ذخیره، ویرایش و انتخاب کنند"
@@ -41,115 +40,163 @@ msgstr "محمد عنبرستانی"
 msgid "https://anbarestany.ir"
 msgstr "https://anbarestany.ir"
 
-#: sk-multi-address.php:56 templates/addresses.php:8
+#: includes/admin/settings.php:17 includes/admin/settings.php:29
+msgid "Multiple Addresses Settings"
+msgstr "تنظیمات مدیریت آدرس"
+
+#: includes/admin/settings.php:18
+msgid "Multiple Addresses"
+msgstr "مدیریت آدرس‌ها"
+
+#: includes/admin/settings.php:50
+msgid "Address Fields Settings"
+msgstr "تنظیمات فیلدهای آدرس"
+
+#: includes/admin/settings.php:56
+msgid "Address Name Field"
+msgstr "فیلد نام آدرس"
+
+#: includes/admin/settings.php:57
+msgid "Email Field"
+msgstr "فیلد ایمیل"
+
+#: includes/admin/settings.php:58
+msgid "Phone Field"
+msgstr "فیلد تلفن"
+
+#: includes/admin/settings.php:59
+msgid "Address Line 2 Field"
+msgstr "فیلد ادامه آدرس"
+
+#: includes/admin/settings.php:86
+msgid "Choose which address fields to display in the form:"
+msgstr "انتخاب کدام فیلد های نمایش داده شوند:"
+
+#: includes/admin/settings.php:98
+msgid "Show this field"
+msgstr "نمایش این فیلد"
+
+#: sk-multi-address.php:70 templates/addresses.php:8
 msgid "My Addresses"
-msgstr "آدرس های من"
+msgstr "آدرس‌های من"
 
-#: sk-multi-address.php:90
+#: sk-multi-address.php:104
 msgid "Are you sure you want to delete this address?"
-msgstr "آیا مطمئن هستید که می خواهید این آدرس را حذف کنید؟"
+msgstr "از حذف این آدرس اطمینان دارید؟"
 
-#: sk-multi-address.php:91
+#: sk-multi-address.php:105
 msgid "Update Address"
 msgstr "بروزرسانی آدرس"
 
-#: sk-multi-address.php:92
-msgid "Select a state..."
-msgstr "یک استان انتخاب کنید..."
-
-#: sk-multi-address.php:93 templates/addresses.php:88
-msgid "Select a country first..."
-msgstr "ابتدا یک کشور را انتخاب کنید..."
-
-#: sk-multi-address.php:118 sk-multi-address.php:148 sk-multi-address.php:162
-msgid "Address not found"
-msgstr "آدرس پیدا نشد"
-
-#: sk-multi-address.php:129
-msgid "Address updated successfully"
-msgstr "آدرس با موفقیت بروز شد"
-
-#: sk-multi-address.php:130
-msgid "Address saved successfully"
-msgstr "آدرس باموفقیت ذخیره شد"
-
-#: sk-multi-address.php:145
-msgid "Address deleted successfully"
-msgstr "آدرس با موفقیت حذف شد"
-
-#: templates/addresses.php:17
-msgid "Email:"
-msgstr "ایمیل:"
-
-#: templates/addresses.php:18
-msgid "Phone:"
-msgstr "تلفن:"
-
-#: templates/addresses.php:19
-msgid "Address:"
-msgstr "آدرس:"
-
-#: templates/addresses.php:28
-msgid "Edit"
-msgstr "ویرایش"
-
-#: templates/addresses.php:29
-msgid "Delete"
-msgstr "حذف"
-
-#: templates/addresses.php:37
+#: sk-multi-address.php:106 templates/addresses.php:49
 msgid "Add New Address"
 msgstr "افزودن آدرس جدید"
 
+#: sk-multi-address.php:107 templates/addresses.php:109
+msgid "Select a country..."
+msgstr "انتخاب کشور..."
+
+#: sk-multi-address.php:108 templates/addresses.php:128
+msgid "Select a state..."
+msgstr "یک استان انتخاب کنید..."
+
+#: sk-multi-address.php:109 templates/addresses.php:129
+msgid "Select a country first..."
+msgstr "کشور را انتخاب کنید..."
+
+#: sk-multi-address.php:110
+msgid "Please select your state manually"
+msgstr "لطفاً استان خود را بصورت دستی انتخاب کنید"
+
+#: sk-multi-address.php:156 sk-multi-address.php:186 sk-multi-address.php:200
+msgid "Address not found"
+msgstr "آدرس یافت نشد"
+
+#: sk-multi-address.php:167
+msgid "Address updated successfully"
+msgstr "آدرس با موفقیت بروز شد"
+
+#: sk-multi-address.php:168
+msgid "Address saved successfully"
+msgstr "آدرس باموفقیت ذخیره شد"
+
+#: sk-multi-address.php:183
+msgid "Address deleted successfully"
+msgstr "آدرس با موفقیت حذف شد"
+
+#: templates/addresses.php:22
+msgid "Email:"
+msgstr "ایمیل:"
+
+#: templates/addresses.php:26
+msgid "Phone:"
+msgstr "تلفن:"
+
+#: templates/addresses.php:29
+msgid "Address:"
+msgstr "آدرس:"
+
+#: templates/addresses.php:40
+msgid "Edit"
+msgstr "ویرایش"
+
 #: templates/addresses.php:41
+msgid "Delete"
+msgstr "حذف"
+
+#: templates/addresses.php:53
 msgid "First Name"
 msgstr "نام"
 
-#: templates/addresses.php:45
+#: templates/addresses.php:57
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
-#: templates/addresses.php:52
+#: templates/addresses.php:66
 msgid "Email"
 msgstr "ایمیل"
 
-#: templates/addresses.php:56
+#: templates/addresses.php:72
 msgid "Phone"
 msgstr "تلفن"
 
-#: templates/addresses.php:62
+#: templates/addresses.php:81
+msgid "Address Name (optional)"
+msgstr "نام آدرس"
+
+#: templates/addresses.php:82
+msgid "e.g., Home, Work, etc."
+msgstr "برای مثال: خانه، محل کار و غیره."
+
+#: templates/addresses.php:87
 msgid "Address Line 1"
 msgstr "آدرس"
 
-#: templates/addresses.php:67
+#: templates/addresses.php:93
 msgid "Address Line 2"
 msgstr "ادامه آدرس"
 
-#: templates/addresses.php:73
+#: templates/addresses.php:107
 msgid "Country"
 msgstr "کشور"
 
-#: templates/addresses.php:75
-msgid "Select a country..."
-msgstr "انتخاب یک کشور..."
-
-#: templates/addresses.php:86
+#: templates/addresses.php:124
 msgid "State"
 msgstr "استان"
 
-#: templates/addresses.php:96
+#: templates/addresses.php:138
 msgid "Postcode"
-msgstr "کد پستی"
+msgstr "کدپستی"
 
-#: templates/addresses.php:100
+#: templates/addresses.php:142
 msgid "City"
 msgstr "شهر"
 
-#: templates/addresses.php:106
+#: templates/addresses.php:148
 msgid "Save Address"
 msgstr "ذخیره آدرس"
 
-#: templates/addresses.php:107
+#: templates/addresses.php:149
 msgid "Cancel"
 msgstr "لغو"
 
@@ -160,9 +207,3 @@ msgstr "استفاده از آدرس های ذخیره شده"
 #: templates/checkout-address-selector.php:10
 msgid "Choose an address..."
 msgstr "انتخاب آدرس ..."
-
-msgid "Address Name (optional)"
-msgstr "نام آدرس (اختیاری)"
-
-msgid "e.g., Home, Work, etc."
-msgstr "مثال: خانه، محل کار و غیره."
