@@ -6,6 +6,7 @@
  * Version: 1.0.0
  * Author: Mohammad Anbarestany
  * Author URI: https://anbarestany.ir
+ * Authority: https://skilledup.ir/
  * Text Domain: sk-multi-address
  * Domain Path: /languages
  * Requires at least: 5.0
