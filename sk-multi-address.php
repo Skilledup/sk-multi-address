@@ -216,7 +216,7 @@ class SK_Multiple_Addresses {
         $country_code = isset($_POST['country']) ? sanitize_text_field($_POST['country']) : '';
         
         if (empty($country_code)) {
-            wp_send_json_error('Country code is required');
+            wp_send_json_error(__('Country code is required', 'sk-multi-address'));
         }
         
         $countries_obj = new WC_Countries();
