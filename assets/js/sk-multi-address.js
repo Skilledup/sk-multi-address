@@ -248,7 +248,78 @@ jQuery(function($) {
         });
     });
 
-    // Modify the address selection handler
+    // Helper function to check if element is select2
+    function isSelect2($element) {
+        return $element.hasClass('select2-hidden-accessible');
+    }
+
+    // Helper function to wait for city options to be populated
+    function waitForCityOptions($cityField, cityValue, maxWait = 5000) {
+        return new Promise((resolve, reject) => {
+            const startTime = Date.now();
+            
+            const observer = new MutationObserver((mutations, obs) => {
+                if (Date.now() - startTime > maxWait) {
+                    obs.disconnect();
+                    reject(new Error('Timeout waiting for city options'));
+                    return;
+                }
+
+                if ($cityField.find('option').length > 1) {
+                    obs.disconnect();
+                    resolve();
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    }
+
+    // Helper function to set field value (handles both regular inputs and select2)
+    async function setCityValue($field, value) {
+        if ($field.is('select')) {
+            // For select dropdowns
+            if (isSelect2($field)) {
+                try {
+                    // Wait for options to be populated
+                    await waitForCityOptions($field, value);
+                    
+                    // Try to find exact match first
+                    if ($field.find(`option[value="${value}"]`).length) {
+                        $field.val(value).trigger('change');
+                    } else {
+                        // Try to find case-insensitive match
+                        const matchingOption = $field.find('option').filter(function() {
+                            return $(this).text().toLowerCase() === value.toLowerCase();
+                        });
+                        
+                        if (matchingOption.length) {
+                            $field.val(matchingOption.val()).trigger('change');
+                        } else {
+                            // If no match found, try to create new option
+                            const newOption = new Option(value, value, true, true);
+                            $field.append(newOption).trigger('change');
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Error setting city value:', error);
+                    // Fallback: try direct value setting
+                    $field.val(value).trigger('change');
+                }
+            } else {
+                // Regular select dropdown
+                $field.val(value).trigger('change');
+            }
+        } else {
+            // Regular input field
+            $field.val(value);
+        }
+    }
+
+    // Update the address selection handler
     $('#sk-saved-addresses-select').on('change', function() {
         const addressId = $(this).val();
         if (!addressId) return;
@@ -265,26 +336,29 @@ jQuery(function($) {
                 if (response.success) {
                     const address = response.data;
                     
-                    // Fill all fields except country and state
+                    // Fill all fields except country, state and city
                     $('#billing_first_name').val(address.first_name);
                     $('#billing_last_name').val(address.last_name);
                     $('#billing_email').val(address.email);
                     $('#billing_phone').val(address.phone);
                     $('#billing_address_1').val(address.address_1);
                     $('#billing_address_2').val(address.address_2);
-                    $('#billing_city').val(address.city);
                     $('#billing_postcode').val(address.postcode);
                     
-                    // Set country and handle state
+                    // Set country first
                     $('#billing_country').val(address.country).trigger('change');
                     
+                    // Wait for state to be populated, then set city
                     waitForState(address.state)
                         .then(() => {
                             $('#billing_state').val(address.state).trigger('change');
+                            // Wait a bit for any city-dependent plugins to react
+                            setTimeout(() => {
+                                setCityValue($('#billing_city'), address.city);
+                            }, 500);
                         })
                         .catch(error => {
-                            console.warn('Failed to set state automatically:', error);
-                            // Optionally show user feedback
+                            console.warn('Failed to set state/city automatically:', error);
                             alert(skMultiAddress.i18n.selectStateManually);
                         });
                 }
