@@ -1,18 +1,15 @@
-# Copyright (C) 2025 Mohammad Anbarestany
-# This file is distributed under the same license as the SK Multiple Addresses for WooCommerce plugin.
 msgid ""
 msgstr ""
 "Project-Id-Version: SK Multiple Addresses for WooCommerce 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sk-multi-"
-"address\n"
-"POT-Creation-Date: 2025-02-02T17:04:11+00:00\n"
-"PO-Revision-Date: 2025-02-02 21:10+0330\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sk-multi-address\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-02-02T17:04:11+00:00\n"
+"PO-Revision-Date: 2025-02-02 21:10+0330\n"
+"Language: fa_IR\n"
 "X-Generator: Poedit 3.5\n"
 "X-Domain: sk-multi-address\n"
 
@@ -23,12 +20,8 @@ msgstr "مدیریت آدرس برای ووکامرس"
 
 #. Description of the plugin
 #: sk-multi-address.php
-msgid ""
-"Enhance WooCommerce with multiple address management - lets customers save, "
-"edit and select from multiple shipping/billing addresses during checkout"
-msgstr ""
-"به مشتریان امکان می‌دهد در حین پرداخت، چندین آدرس حمل و نقل/صورت‌حساب را "
-"ذخیره، ویرایش و انتخاب کنند"
+msgid "Enhance WooCommerce with multiple address management - lets customers save, edit and select from multiple shipping/billing addresses during checkout"
+msgstr "به مشتریان امکان می‌دهد در حین پرداخت، چندین آدرس حمل و نقل/صورت‌حساب را ذخیره، ویرایش و انتخاب کنند"
 
 #. Author of the plugin
 #: sk-multi-address.php
@@ -40,87 +33,95 @@ msgstr "محمد عنبرستانی"
 msgid "https://anbarestany.ir"
 msgstr "https://anbarestany.ir"
 
-#: includes/admin/settings.php:17 includes/admin/settings.php:29
+#: includes/admin/settings.php:21
+#: includes/admin/settings.php:33
 msgid "Multiple Addresses Settings"
 msgstr "تنظیمات مدیریت آدرس"
 
-#: includes/admin/settings.php:18
+#: includes/admin/settings.php:22
 msgid "Multiple Addresses"
 msgstr "مدیریت آدرس‌ها"
 
-#: includes/admin/settings.php:50
+#: includes/admin/settings.php:56
 msgid "Address Fields Settings"
 msgstr "تنظیمات فیلدهای آدرس"
 
-#: includes/admin/settings.php:56
+#: includes/admin/settings.php:62
 msgid "Address Name Field"
 msgstr "فیلد نام آدرس"
 
-#: includes/admin/settings.php:57
+#: includes/admin/settings.php:63
 msgid "Email Field"
 msgstr "فیلد ایمیل"
 
-#: includes/admin/settings.php:58
+#: includes/admin/settings.php:64
 msgid "Phone Field"
 msgstr "فیلد تلفن"
 
-#: includes/admin/settings.php:59
+#: includes/admin/settings.php:65
 msgid "Address Line 2 Field"
 msgstr "فیلد ادامه آدرس"
 
-#: includes/admin/settings.php:86
+#: includes/admin/settings.php:116
 msgid "Choose which address fields to display in the form:"
 msgstr "انتخاب کدام فیلد های نمایش داده شوند:"
 
-#: includes/admin/settings.php:98
+#: includes/admin/settings.php:128
 msgid "Show this field"
 msgstr "نمایش این فیلد"
 
-#: sk-multi-address.php:70 templates/addresses.php:8
+#: sk-multi-address.php:73
+#: templates/addresses.php:8
 msgid "My Addresses"
 msgstr "آدرس‌های من"
 
-#: sk-multi-address.php:104
+#: sk-multi-address.php:107
 msgid "Are you sure you want to delete this address?"
 msgstr "از حذف این آدرس اطمینان دارید؟"
 
-#: sk-multi-address.php:105
+#: sk-multi-address.php:108
 msgid "Update Address"
 msgstr "بروزرسانی آدرس"
 
-#: sk-multi-address.php:106 templates/addresses.php:49
+#: sk-multi-address.php:109
+#: templates/addresses.php:49
 msgid "Add New Address"
 msgstr "افزودن آدرس جدید"
 
-#: sk-multi-address.php:107 templates/addresses.php:109
+#: sk-multi-address.php:110
+#: templates/addresses.php:109
 msgid "Select a country..."
 msgstr "انتخاب کشور..."
 
-#: sk-multi-address.php:108 templates/addresses.php:128
+#: sk-multi-address.php:111
+#: templates/addresses.php:128
 msgid "Select a state..."
 msgstr "یک استان انتخاب کنید..."
 
-#: sk-multi-address.php:109 templates/addresses.php:129
+#: sk-multi-address.php:112
+#: templates/addresses.php:129
 msgid "Select a country first..."
 msgstr "کشور را انتخاب کنید..."
 
-#: sk-multi-address.php:110
+#: sk-multi-address.php:113
 msgid "Please select your state manually"
 msgstr "لطفاً استان خود را بصورت دستی انتخاب کنید"
 
-#: sk-multi-address.php:156 sk-multi-address.php:186 sk-multi-address.php:200
+#: sk-multi-address.php:159
+#: sk-multi-address.php:189
+#: sk-multi-address.php:203
 msgid "Address not found"
 msgstr "آدرس یافت نشد"
 
-#: sk-multi-address.php:167
+#: sk-multi-address.php:170
 msgid "Address updated successfully"
 msgstr "آدرس با موفقیت بروز شد"
 
-#: sk-multi-address.php:168
+#: sk-multi-address.php:171
 msgid "Address saved successfully"
 msgstr "آدرس باموفقیت ذخیره شد"
 
-#: sk-multi-address.php:183
+#: sk-multi-address.php:186
 msgid "Address deleted successfully"
 msgstr "آدرس با موفقیت حذف شد"
 
@@ -159,10 +160,6 @@ msgstr "ایمیل"
 #: templates/addresses.php:72
 msgid "Phone"
 msgstr "تلفن"
-
-#: templates/addresses.php:81
-msgid "Address Name (optional)"
-msgstr "نام آدرس"
 
 #: templates/addresses.php:82
 msgid "e.g., Home, Work, etc."
@@ -204,6 +201,22 @@ msgstr "لغو"
 msgid "Select from saved addresses"
 msgstr "استفاده از آدرس های ذخیره شده"
 
-#: templates/checkout-address-selector.php:10
+#: templates/checkout-address-selector.php:11
 msgid "Choose an address..."
 msgstr "انتخاب آدرس ..."
+
+#: includes/admin/settings.php:87
+msgid "Security check failed."
+msgstr "بررسی امنیتی ناموفق بود."
+
+#: includes/admin/settings.php:105
+msgid "At least one field should be enabled."
+msgstr "حداقل یک فیلد باید فعال باشد."
+
+#: templates/addresses.php:81
+msgid "Address Name"
+msgstr "نام آدرس"
+
+#: templates/checkout-address-selector.php:26
+msgid "Add new address"
+msgstr "افزودن آدرس جدید"

@@ -23,6 +23,6 @@ if (!defined('ABSPATH')) {
                 </option>
             <?php endforeach; ?>
         </select>
-        <a href="<?php echo esc_url(wc_get_account_endpoint_url('addresses')) . '#sk-form-title'; ?>" id="sk-add-new-address" class="button" title="<?php esc_attr_e('Add new', 'sk-multi-address'); ?>">+</a>
+        <a href="<?php echo esc_url(wc_get_account_endpoint_url('addresses')) . '#sk-form-title'; ?>" id="sk-add-new-address" class="button" title="<?php esc_attr_e('Add new address', 'sk-multi-address'); ?>">+</a>
     </div>
 </div>
