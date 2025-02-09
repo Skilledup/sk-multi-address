@@ -161,6 +161,7 @@ jQuery(function($) {
                 form.find('[name="last_name"]').val(address.last_name);
                 form.find('[name="email"]').val(address.email);
                 form.find('[name="phone"]').val(address.phone);
+                form.find('[name="address_name"]').val(address.address_name);
                 form.find('[name="address_1"]').val(address.address_1);
                 form.find('[name="address_2"]').val(address.address_2);
                 form.find('[name="city"]').val(address.city);

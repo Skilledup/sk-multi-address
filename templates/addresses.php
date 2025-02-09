@@ -78,7 +78,7 @@ if (!defined('ABSPATH')) {
 
             <?php if (SK_Multiple_Addresses::is_field_visible('address_name')): ?>
                 <div class="sk-form-field sk-single-line">
-                    <label><?php esc_html_e('Address Name (optional)', 'sk-multi-address'); ?></label>
+                    <label><?php esc_html_e('Address Name', 'sk-multi-address'); ?></label>
                     <input type="text" name="address_name" placeholder="<?php esc_html_e('e.g., Home, Work, etc.', 'sk-multi-address'); ?>">
                 </div>
             <?php endif; ?>
