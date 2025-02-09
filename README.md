@@ -10,6 +10,7 @@ Enhance WooCommerce with multiple address management - lets customers save, edit
 - Mobile-friendly with enhanced UI elements (Select2 dropdowns)
 - Full multilingual support and AJAX functionality
 - Handles storing Arabic/Persian numbers (Phone and Postcode)
+- Support for shops with city dropdown (Select2) (e.g., shops using Persian WooCommerce plugin)
 - Gutenberg support coming soon
 
 ## Requirements
