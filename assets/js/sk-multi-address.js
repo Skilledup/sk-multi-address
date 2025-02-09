@@ -1,28 +1,29 @@
 jQuery(function($) {
-    // Function to wait for the state field to be populated
+    // Modify the waitForState function to be more reliable
     function waitForState(stateValue, maxWait = 5000) {
         return new Promise((resolve, reject) => {
             const startTime = Date.now();
-            
-            const observer = new MutationObserver((mutations, obs) => {
+            const checkState = () => {
                 const stateField = $('#billing_state');
                 
+                // Check if state field exists and has options
+                if (stateField.length && stateField.find('option').length > 1) {
+                    resolve();
+                    return;
+                }
+                
+                // Check for timeout
                 if (Date.now() - startTime > maxWait) {
-                    obs.disconnect();
                     reject(new Error('Timeout waiting for state field'));
                     return;
                 }
-
-                if (stateField.length && stateField.find('option').length > 1) {
-                    obs.disconnect();
-                    resolve();
-                }
-            });
-
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
+                
+                // Try again in 100ms
+                setTimeout(checkState, 100);
+            };
+            
+            // Start checking
+            checkState();
         });
     }
 
@@ -319,6 +320,28 @@ jQuery(function($) {
         }
     }
 
+    // Helper function to find and set phone field value
+    function setPhoneFieldValue(phoneNumber) {
+        // Try standard WooCommerce phone field
+        const $standardPhone = $('#billing_phone');
+        
+        // Try Digits plugin phone field
+        const $digitsPhone = $('input[data-dig-main="billing_phone"], input[name="mobile/email"][mob="1"]');
+        
+        if ($digitsPhone.length) {
+            // Set value for Digits phone field
+            $digitsPhone.val(phoneNumber).trigger('change');
+            
+            // Update additional Digits attributes if they exist
+            if ($digitsPhone.attr('countrycode')) {
+                $digitsPhone.attr('user_phone', phoneNumber);
+            }
+        } else if ($standardPhone.length) {
+            // Set value for standard WooCommerce phone field
+            $standardPhone.val(phoneNumber).trigger('change');
+        }
+    }
+
     // Update the address selection handler
     $('#sk-saved-addresses-select').on('change', function() {
         const addressId = $(this).val();
@@ -336,31 +359,43 @@ jQuery(function($) {
                 if (response.success) {
                     const address = response.data;
                     
-                    // Fill all fields except country, state and city
-                    $('#billing_first_name').val(address.first_name);
-                    $('#billing_last_name').val(address.last_name);
-                    $('#billing_email').val(address.email);
-                    $('#billing_phone').val(address.phone);
-                    $('#billing_address_1').val(address.address_1);
-                    $('#billing_address_2').val(address.address_2);
-                    $('#billing_postcode').val(address.postcode);
-                    
-                    // Set country first
+                    // Set country first and trigger change
                     $('#billing_country').val(address.country).trigger('change');
-                    
-                    // Wait for state to be populated, then set city
-                    waitForState(address.state)
-                        .then(() => {
-                            $('#billing_state').val(address.state).trigger('change');
-                            // Wait a bit for any city-dependent plugins to react
-                            setTimeout(() => {
-                                setCityValue($('#billing_city'), address.city);
-                            }, 500);
-                        })
-                        .catch(error => {
-                            console.warn('Failed to set state/city automatically:', error);
-                            alert(skMultiAddress.i18n.selectStateManually);
-                        });
+
+                    // Add a small delay before checking state
+                    setTimeout(() => {
+                        waitForState(address.state)
+                            .then(() => {
+                                $('#billing_state').val(address.state).trigger('change');
+                                
+                                // Fill all fields immediately
+                                $('#billing_first_name').val(address.first_name);
+                                $('#billing_last_name').val(address.last_name);
+                                $('#billing_email').val(address.email);
+                                setPhoneFieldValue(address.phone);
+                                $('#billing_address_1').val(address.address_1);
+                                $('#billing_address_2').val(address.address_2);
+                                $('#billing_postcode').val(address.postcode);
+                                
+                                // Handle city last
+                                setTimeout(() => {
+                                    setCityValue($('#billing_city'), address.city);
+                                }, 500);
+                            })
+                            .catch(error => {
+                                console.warn('Failed to set state/city automatically:', error);
+                                alert(skMultiAddress.i18n.selectStateManually);
+
+                                // Fill all fields except state and city
+                                $('#billing_first_name').val(address.first_name);
+                                $('#billing_last_name').val(address.last_name);
+                                $('#billing_email').val(address.email);
+                                setPhoneFieldValue(address.phone);
+                                $('#billing_address_1').val(address.address_1);
+                                $('#billing_address_2').val(address.address_2);
+                                $('#billing_postcode').val(address.postcode);
+                            });
+                    }, 200);
                 }
             }
         });
