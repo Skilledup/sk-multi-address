@@ -1,12 +1,11 @@
 <?php
 /**
- * Plugin Name: SK Multiple Addresses for WooCommerce
+ * Plugin Name: SK Multiple Addresses
  * Plugin URI: 
  * Description: Enhance WooCommerce with multiple address management - lets customers save, edit and select from multiple shipping/billing addresses during checkout
  * Version: 1.0.0
  * Author: Mohammad Anbarestany
  * Author URI: https://anbarestany.ir
- * Authority: https://skilledup.ir/
  * License: GPL-3.0
  * Text Domain: sk-multi-address
  * Domain Path: /languages
