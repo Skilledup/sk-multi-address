@@ -158,6 +158,11 @@
     animation: spin 1s linear infinite;
 }
 
+.sk-loading-spinner:dir(rtl) {
+    right: 15px;
+    left: auto;
+}
+
 .sk-state-field.loading .sk-loading-spinner {
     display: block;
 }

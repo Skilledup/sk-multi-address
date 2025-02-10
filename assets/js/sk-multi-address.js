@@ -51,9 +51,9 @@ jQuery(function($) {
     }
 
     // Create a reusable function for loading states
-    function loadStates(countryCode) {
-        var $stateField = $('.sk-state-field');
-        var $stateSelect = $('.sk-state-select');
+    function loadStates(countryCode, stateValue = '') {
+        const $stateField = $('.sk-state-field');
+        const $stateSelect = $('.sk-state-select');
         
         if (!countryCode) {
             $stateSelect.prop('disabled', true)
@@ -67,15 +67,11 @@ jQuery(function($) {
         // Add loading state
         $stateField.addClass('loading');
         
-        var data = {
-            action: 'sk_get_states',
-            country: countryCode,
-            nonce: skMultiAddress.nonce
-        };
-
-        $.post(skMultiAddress.ajax_url, data, function(response) {
+        makeAjaxCall('sk_get_states', {
+            country: countryCode
+        }).done(function(response) {
             if (response.success) {
-                var states = response.data;
+                const states = response.data;
                 $stateSelect.empty();
                 
                 if (Object.keys(states).length === 0) {
@@ -93,10 +89,18 @@ jQuery(function($) {
                     });
                     
                     $stateSelect.prop('disabled', false)
-                               .prop('required', true)
-                               .trigger('change');
+                               .prop('required', true);
+                    
+                    // Set state value if provided
+                    if (stateValue) {
+                        $stateSelect.val(stateValue).trigger('change.select2');
+                    } else {
+                        $stateSelect.trigger('change');
+                    }
                 }
             }
+        }).fail(function(error) {
+            console.error('Failed to load states:', error);
         }).always(function() {
             // Remove loading state
             $stateField.removeClass('loading');
@@ -121,96 +125,48 @@ jQuery(function($) {
             addressData[key] = value;
         });
 
-        $.ajax({
-            url: skMultiAddress.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'sk_save_address',
-                nonce: skMultiAddress.nonce,
-                address: addressData,
-                address_id: addressId // Will be undefined for new addresses
-            },
-            success: function(response) {
-                if (response.success) {
-                    location.reload();
-                }
+        makeAjaxCall('sk_save_address', {
+            address: addressData,
+            address_id: addressId
+        }).done(function(response) {
+            if (response.success) {
+                location.reload();
             }
+        }).fail(function(error) {
+            console.error('Failed to save address:', error);
         });
     });
     // Handle edit address button click
     $('.sk-edit-address').on('click', function(e) {
         e.preventDefault();
-        var addressId = $(this).closest('.sk-address-item').data('address-id');
-        var form = $('#sk-new-address-form');
+        const addressId = $(this).closest('.sk-address-item').data('address-id');
+        const form = $('#sk-new-address-form');
         
-        var data = {
-            action: 'sk_get_address',
-            address_id: addressId,
-            nonce: skMultiAddress.nonce
-        };
-
-        $.post(skMultiAddress.ajax_url, data, function(response) {
+        makeAjaxCall('sk_get_address', {
+            address_id: addressId
+        }).done(function(response) {
             if (response.success) {
-                var address = response.data;
+                const address = response.data;
                 
                 // Update form title
                 $('#sk-form-title').text(skMultiAddress.i18n.updateAddress);
                 
-                // Set basic form values
-                form.find('[name="first_name"]').val(address.first_name);
-                form.find('[name="last_name"]').val(address.last_name);
-                form.find('[name="email"]').val(address.email);
-                form.find('[name="phone"]').val(address.phone);
-                form.find('[name="address_name"]').val(address.address_name);
-                form.find('[name="address_1"]').val(address.address_1);
-                form.find('[name="address_2"]').val(address.address_2);
-                form.find('[name="city"]').val(address.city);
-                form.find('[name="postcode"]').val(address.postcode);
+                // Set basic form values first
+                populateBasicFields(form, address);
                 
-                // First, load the states for the country
-                var stateData = {
-                    action: 'sk_get_states',
-                    country: address.country,
-                    nonce: skMultiAddress.nonce
-                };
-                
-                // Add loading state
-                var $stateField = form.find('.sk-state-field');
-                $stateField.addClass('loading');
-                
-                $.post(skMultiAddress.ajax_url, stateData, function(stateResponse) {
-                    if (stateResponse.success) {
-                        var $stateSelect = form.find('[name="state"]');
-                        var states = stateResponse.data;
-                        
-                        // Clear and populate state options
-                        $stateSelect.empty();
-                        
-                        if (Object.keys(states).length === 0) {
-                            $stateSelect.prop('disabled', true)
-                                      .prop('required', false)
-                                      .append('<option value="">-</option>');
-                        } else {
-                            $stateSelect.append('<option value="">' + skMultiAddress.i18n.selectState + '</option>');
-                            
-                            $.each(states, function(code, name) {
-                                $stateSelect.append($('<option></option>')
-                                    .attr('value', code)
-                                    .text(name));
-                            });
-                            
-                            $stateSelect.prop('disabled', false)
-                                      .prop('required', true);
-                        }
-                        
-                        // Now set both country and state values
-                        form.find('[name="country"]').val(address.country).trigger('change.select2');
-                        $stateSelect.val(address.state).trigger('change.select2');
+                // Set country value and load states
+                const $countrySelect = form.find('.sk-country-select');
+                if ($countrySelect.length) {
+                    $countrySelect.val(address.country).trigger('change.select2');
+                    loadStates(address.country, address.state);
+                } else {
+                    // If country is hidden input (single country case)
+                    const $hiddenCountry = form.find('input[type="hidden"][name="country"]');
+                    if ($hiddenCountry.length) {
+                        $hiddenCountry.val(address.country);
+                        loadStates(address.country, address.state);
                     }
-                }).always(function() {
-                    // Remove loading state
-                    $stateField.removeClass('loading');
-                });
+                }
                 
                 // Add address ID to form
                 form.data('address-id', addressId);
@@ -220,6 +176,8 @@ jQuery(function($) {
                     scrollTop: form.offset().top - 100
                 }, 500);
             }
+        }).fail(function(error) {
+            console.error('Failed to get address:', error);
         });
     });
 
@@ -348,57 +306,38 @@ jQuery(function($) {
         const addressId = $(this).val();
         if (!addressId) return;
 
-        $.ajax({
-            url: skMultiAddress.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'sk_get_address',
-                nonce: skMultiAddress.nonce,
-                address_id: addressId
-            },
-            success: function(response) {
-                if (response.success) {
-                    const address = response.data;
+        makeAjaxCall('sk_get_address', {
+            address_id: addressId
+        }).done(function(response) {
+            if (response.success) {
+                const address = response.data;
+                
+                // Set country first
+                const $country = $('#billing_country');
+                $country.val(address.country).trigger('change');
+
+                // Wait for state field to be ready
+                waitForState(address.state).then(() => {
+                    const $state = $('#billing_state');
+                    $state.val(address.state).trigger('change');
                     
-                    // Set country first and trigger change
-                    $('#billing_country').val(address.country).trigger('change');
-
-                    // Add a small delay before checking state
+                    // Fill all other fields using the checkout form
+                    populateBasicFields($('form.checkout'), address);
+                    
+                    // Handle city separately with delay
                     setTimeout(() => {
-                        waitForState(address.state)
-                            .then(() => {
-                                $('#billing_state').val(address.state).trigger('change');
-                                
-                                // Fill all fields immediately
-                                $('#billing_first_name').val(address.first_name);
-                                $('#billing_last_name').val(address.last_name);
-                                $('#billing_email').val(address.email);
-                                setPhoneFieldValue(address.phone);
-                                $('#billing_address_1').val(address.address_1);
-                                $('#billing_address_2').val(address.address_2);
-                                $('#billing_postcode').val(address.postcode);
-                                
-                                // Handle city last
-                                setTimeout(() => {
-                                    setCityValue($('#billing_city'), address.city);
-                                }, 500);
-                            })
-                            .catch(error => {
-                                console.warn('Failed to set state/city automatically:', error);
-                                alert(skMultiAddress.i18n.selectStateManually);
-
-                                // Fill all fields except state and city
-                                $('#billing_first_name').val(address.first_name);
-                                $('#billing_last_name').val(address.last_name);
-                                $('#billing_email').val(address.email);
-                                setPhoneFieldValue(address.phone);
-                                $('#billing_address_1').val(address.address_1);
-                                $('#billing_address_2').val(address.address_2);
-                                $('#billing_postcode').val(address.postcode);
-                            });
-                    }, 200);
-                }
+                        setCityValue($('#billing_city'), address.city);
+                    }, 500);
+                }).catch(error => {
+                    console.warn('Failed to set state automatically:', error);
+                    alert(skMultiAddress.i18n.selectStateManually);
+                    
+                    // Fill all fields except state
+                    populateBasicFields($('form.checkout'), address);
+                });
             }
+        }).fail(function(error) {
+            console.error('Failed to get address:', error);
         });
     });
 
@@ -409,4 +348,39 @@ jQuery(function($) {
         form.find('button[type="submit"]').text(skMultiAddress.i18n.saveAddress);
         $('#sk-form-title').text(skMultiAddress.i18n.addNewAddress);
     });
+
+    function populateBasicFields(form, address) {
+        // Handle form fields
+        form.find('[name="first_name"]').val(address.first_name);
+        form.find('[name="last_name"]').val(address.last_name);
+        form.find('[name="email"]').val(address.email);
+        form.find('[name="phone"]').val(address.phone);
+        form.find('[name="address_name"]').val(address.address_name);
+        form.find('[name="address_1"]').val(address.address_1);
+        form.find('[name="address_2"]').val(address.address_2);
+        form.find('[name="postcode"]').val(address.postcode);
+        form.find('[name="city"]').val(address.city);
+        
+        // Handle WooCommerce billing fields
+        $('#billing_first_name').val(address.first_name).trigger('change');
+        $('#billing_last_name').val(address.last_name).trigger('change');
+        $('#billing_email').val(address.email).trigger('change');
+        $('#billing_address_1').val(address.address_1).trigger('change');
+        $('#billing_address_2').val(address.address_2).trigger('change');
+        $('#billing_postcode').val(address.postcode).trigger('change');
+        $('#billing_city').val(address.city).trigger('change');
+        setPhoneFieldValue(address.phone);
+    }
+
+    function makeAjaxCall(action, data = {}) {
+        return $.ajax({
+            url: skMultiAddress.ajax_url,
+            type: 'POST',
+            data: {
+                ...data,
+                action: action,
+                nonce: skMultiAddress.nonce
+            }
+        });
+    }
 });
