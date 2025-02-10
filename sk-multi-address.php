@@ -7,6 +7,7 @@
  * Author: Mohammad Anbarestany
  * Author URI: https://anbarestany.ir
  * Authority: https://skilledup.ir/
+ * License: GPL-3.0
  * Text Domain: sk-multi-address
  * Domain Path: /languages
  * Requires at least: 5.0
@@ -95,7 +96,7 @@ class SK_Multiple_Addresses {
             
             wp_enqueue_script('sk-multi-address', 
                 plugin_dir_url(__FILE__) . 'assets/js/sk-multi-address.js',
-                array('jquery'),
+                array('jquery', 'select2'),
                 '1.0.0',
                 true
             );
@@ -113,10 +114,6 @@ class SK_Multiple_Addresses {
                     'selectStateManually' => __('Please select your state manually', 'sk-multi-address'),
                 )
             ));
-
-            // Enqueue Select2
-            wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
-            wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
         }
     }
 
